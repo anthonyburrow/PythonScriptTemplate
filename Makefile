@@ -28,20 +28,20 @@ venv:
 install:
 	@if [ -d "$(VENV_DIR)" ] && [ "$(IN_VENV)" = "0" ]; then \
 		echo "Virtual environment detected but not activated."; \
-		echo "Installing in venv..."; \
+		echo "Installing dependencies in venv..."; \
 		$(VENV_PIP) install --upgrade pip; \
-		$(VENV_PIP) install -e .; \
+		$(VENV_PIP) install -r requirements.txt; \
 	elif [ "$(IN_VENV)" = "1" ]; then \
-		echo "Installing in active virtual environment..."; \
+		echo "Installing dependencies in active virtual environment..."; \
 		pip install --upgrade pip; \
-		pip install -e .; \
+		pip install -r requirements.txt; \
 	else \
 		echo "No virtual environment detected."; \
-		echo "Installing in system/user Python..."; \
+		echo "Installing dependencies in system/user Python..."; \
 		pip install --upgrade pip; \
-		pip install -e .; \
+		pip install -r requirements.txt; \
 	fi
-	@echo "Installation complete!"
+	@echo "Dependencies installed!"
 
 clean:
 	@echo "Cleaning build artifacts..."
